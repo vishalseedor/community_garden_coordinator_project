@@ -3,6 +3,7 @@ import 'package:community_garden_coordinator/pages/drop_down.dart';
 import 'package:community_garden_coordinator/pages/onboarding_page.dart';
 import 'package:community_garden_coordinator/pages/product_details_page.dart';
 import 'package:community_garden_coordinator/pages/registerationpage.dart';
+import 'package:community_garden_coordinator/pages/splash_page.dart';
 import 'package:community_garden_coordinator/provider/CategoryProvider/allcategoryscreen.dart';
 import 'package:community_garden_coordinator/provider/ViewPackageProvider/allgardensscreen.dart';
 import 'package:community_garden_coordinator/provider/ViewPackageProvider/viewpackageprovider.dart';
@@ -34,7 +35,7 @@ class MainApp extends StatelessWidget {
           useMaterial3: true,
           textTheme: GoogleFonts.nunitoTextTheme(),
         ),
-        home: const OnboardingPage(),
+        home: const SplashScreen(),
         routes: {
             'all_garden_screen': (context) => const AllGardenScreen(),
           'garden_details_screen': (context) {

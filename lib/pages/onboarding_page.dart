@@ -27,7 +27,7 @@ class OnboardingPage extends StatelessWidget {
                 padding: EdgeInsets.only(top: 30, bottom: 30),
                 child: Text(
                   "Welcome to our community garden, where seeds of connection, growth, and sustainability are planted, nurtured, and blossomed under the dedicated coordination of our passionate garden enthusiasts",
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.center
                 ),
               ),
               /**/
