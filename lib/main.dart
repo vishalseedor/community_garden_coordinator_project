@@ -1,6 +1,5 @@
 
 import 'package:community_garden_coordinator/pages/drop_down.dart';
-import 'package:community_garden_coordinator/pages/onboarding_page.dart';
 import 'package:community_garden_coordinator/pages/product_details_page.dart';
 import 'package:community_garden_coordinator/pages/registerationpage.dart';
 import 'package:community_garden_coordinator/pages/splash_page.dart';
@@ -10,7 +9,6 @@ import 'package:community_garden_coordinator/provider/ViewPackageProvider/viewpa
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
 import 'provider/CategoryProvider/categoryprovider.dart';
 
 void main() {
@@ -42,12 +40,10 @@ class MainApp extends StatelessWidget {
            String id = ModalRoute.of(context)!.settings.arguments.toString();
            return GardenDetailsPage(
            id: id,
-    );
+    ); 
   },
       'all_category_screen':(context) => const AllCategoryScreen(),
       'register_screen':(context) => const RegisterationPage()
-
-         
   },
         
       ),
