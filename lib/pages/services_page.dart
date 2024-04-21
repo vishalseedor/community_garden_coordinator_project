@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 
 class ServicesPage extends StatefulWidget {
+    static const routeName = 'all_category_screen';
   const ServicesPage({super.key});
 
   @override

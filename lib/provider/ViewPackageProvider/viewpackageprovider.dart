@@ -33,6 +33,15 @@ class GardenProvider with ChangeNotifier {
   List<GardenPackageModel> get gardens {
     return [..._gardens];
   }
+   List<GardenPackageModel> _searchProducts = [];
+  List<GardenPackageModel> get searchProducts {
+    return [..._searchProducts];
+  }
+
+  List<GardenPackageModel> _filteredProducts = [];
+  List<GardenPackageModel> get filteredProducts {
+    return [..._filteredProducts];
+  }
 
   Future getAllGardenData({required BuildContext context}) async {
     try {
@@ -51,6 +60,7 @@ class GardenProvider with ChangeNotifier {
       if (response.statusCode == 200) {
         _isLoading = false;
         _gardens = [];
+         _filteredProducts = [];
         var extractedData = json.decode(response.body);
         //  print(json.decode(response.body) + 'printed extrated data');
         final List<dynamic> gardenDetails = extractedData['garden_package_details'];
@@ -99,6 +109,67 @@ class GardenProvider with ChangeNotifier {
       _isSelect = false;
       notifyListeners();
     }
+  }
+  Future<void> getSearchData({dynamic value}) async {
+    _isLoading = true;
+    var response = await https.get(
+      Uri.parse(
+          "http://campus.sicsglobal.co.in/Project/communitygarden/api/search_package.php?keyword=$value"),
+    );
+
+    print(
+        "http://campus.sicsglobal.co.in/Project/communitygarden/api/search_package.php?keyword=$value");
+
+    if (response.statusCode == 200) {
+      var responseBody = response.body;
+
+        print(responseBody);
+
+        _searchProducts = [];
+
+        var extractedData = json.decode(response.body);
+        //  print(json.decode(response.body) + 'printed extrated data');
+        final List<dynamic> gardenDetails = extractedData['garden_package_details'];
+        for (var i = 0; i < gardenDetails.length; i++) {
+          _searchProducts.add(
+              GardenPackageModel(
+              packageId: gardenDetails[i]['package_id'].toString(),
+              packageName: gardenDetails[i]['package_name'].toString(),
+              description: gardenDetails[i]['description'].toString(),
+              price: gardenDetails[i]['price'].toString(),
+              area: gardenDetails[i]['area'].toString(), 
+              unitType: gardenDetails[i]['unit_type'].toString(),
+              daysRequired: gardenDetails[i]['days_required'].toString(),
+              photo: gardenDetails[i]['photo'].toString(),
+              phone: gardenDetails[i]['phone'].toString(),
+              coordinatorId: gardenDetails[i]['coordinator_id'].toString(),
+              userid: gardenDetails[i]['userid'].toString(),
+              name: gardenDetails[i]['name'].toString(),
+              email: gardenDetails[i]['email'].toString(),
+              aboutCoordinator: gardenDetails[i]['about_coordinator'].toString(),
+              address: gardenDetails[i]['address'].toString(),
+              state: gardenDetails[i]['state'].toString(),
+              city: gardenDetails[i]['city'].toString()
+
+              
+            ),
+          );
+        }
+
+        print('product details search' + _searchProducts.toString());
+        print('products loading completed --->' + 'loading data');
+          _isLoading = false;
+        notifyListeners();
+
+
+    } else {
+        _isLoading = false;
+          notifyListeners();
+      print('Failed to fetch data. Status code: ${response.statusCode}');
+    }
+
+    _isLoading = false;
+    notifyListeners();
   }
  
 }

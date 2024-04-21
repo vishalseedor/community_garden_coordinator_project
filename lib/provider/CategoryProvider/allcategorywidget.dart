@@ -1,5 +1,8 @@
 
 import 'dart:ui';
+import 'package:community_garden_coordinator/pages/CategoryEachProvider/categoryeachscreen.dart';
+import 'package:community_garden_coordinator/pages/services_page.dart';
+import 'package:community_garden_coordinator/provider/CategoryProvider/allcategoryscreen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -27,36 +30,42 @@ class _AllCategoryWidgetState extends State<AllCategoryWidget > {
     final size = MediaQuery.of(context).size;
     //  final pet = Provider.of<PetModel>(context);
 
-     return Container(
-            alignment: Alignment.bottomCenter,
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
-                image: NetworkImage(widget.categoryimage),
-                fit: BoxFit.cover,
+     return GestureDetector(
+      onTap: (){
+        Navigator.of(context)
+                .pushNamed(AllCategoryEachScreen.routeName,arguments:widget.categoryid);
+      },
+       child: Container(
+              alignment: Alignment.bottomCenter,
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                image: DecorationImage(
+                  image: NetworkImage(widget.categoryimage),
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(5),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: const BorderRadius.all(Radius.circular(5)),
-                  ),
-                  child: Text(
-                    widget.categoryname,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      borderRadius: const BorderRadius.all(Radius.circular(5)),
+                    ),
+                    child: Text(
+                      widget.categoryname,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          );
+     );
   }
 }

@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 
 class AllCategoryScreen extends StatefulWidget {
-  static const routeName = 'all_category_screen';
+
 
   const AllCategoryScreen({
     Key? key,

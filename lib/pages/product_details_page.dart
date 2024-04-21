@@ -48,11 +48,11 @@ class _GardenDetailsPageState extends State<GardenDetailsPage> {
         Provider.of<GardenProvider>(context).gardens.firstWhere((element) => element.packageId == widget.id);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Details"),
+        title: const Text("Garden Package Details",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(IconlyLight.bookmark),
+            icon: const Icon(IconlyLight.buy),
           ),
         ],
       ),
@@ -73,27 +73,22 @@ class _GardenDetailsPageState extends State<GardenDetailsPage> {
           ),
           Text(
             gardenData.packageName,
-            style: Theme.of(context).textTheme.titleLarge,
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold,fontSize: 19),
           ),
           const SizedBox(height: 5),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Available in stock",
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-              ),
+            children: [ 
+              
               RichText(
                 text: TextSpan(
                   children: [
                     TextSpan(
-                        text: "\$${gardenData.price}",
-                        style: Theme.of(context).textTheme.titleLarge),
+                        text: "₹ ${gardenData.price}",
+                        style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold,fontSize: 18)),
                     TextSpan(
-                        text: "/${gardenData.unitType}",
-                        style: Theme.of(context).textTheme.bodySmall),
+                        text: "  /  ${gardenData.unitType}",
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold,color: Colors.green)),
                   ],
                 ),
               )

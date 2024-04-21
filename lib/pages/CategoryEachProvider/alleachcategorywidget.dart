@@ -1,40 +1,34 @@
-
-
 import 'package:community_garden_coordinator/pages/product_details_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 
 
-class AllGardenWidgett extends StatefulWidget {
+
+class AllEachCategoryWidget extends StatefulWidget {
   final String packageid;
   final String packagename;
-  final String price;
-  final String area;
-  final String unittype;
+  final String packageprice;
   final String image;
   
 
-  const AllGardenWidgett(
+  const AllEachCategoryWidget(
       {super.key,
-    required this.packageid,
-    required this.packagename,
-    required this.price,
-    required this.area,
-    required this.unittype,
+     required this.packageid,
+     required this.packagename,
+     required this.packageprice,
      required this.image
       });
 
   @override
-  State<AllGardenWidgett > createState() => _AllGardenWidgettState();
+  State<AllEachCategoryWidget > createState() => _AllEachCategoryWidgetState();
 }
 
-class _AllGardenWidgettState extends State<AllGardenWidgett > {
+class _AllEachCategoryWidgetState extends State<AllEachCategoryWidget > {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     //  final pet = Provider.of<PetModel>(context);
 
-     return GestureDetector(
+       return GestureDetector(
       onTap: () {
         Navigator.of(context).pushNamed(GardenDetailsPage.routeName,arguments:widget.packageid);
          // Navigator.of(context).pushNamed(GardenDetailsScreen.routeName,arguments:widget.packageid);
@@ -81,22 +75,22 @@ class _AllGardenWidgettState extends State<AllGardenWidgett > {
                         text: TextSpan(
                           children: [
                             TextSpan(
-                                text: "₹ ${widget.price}",
+                                text: "₹ ${widget.packageprice}",
                                 style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.green,fontWeight: FontWeight.bold)),
                            
                           ],
                         ),
                       ),
-                      SizedBox(
-                        width: 30,
-                        height: 30,
-                        child: IconButton.filled(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {},
-                          iconSize: 18,
-                          icon: const Icon(Icons.add,color: Colors.white,),
-                        ),
-                      )
+                      // SizedBox(
+                      //   width: 30,
+                      //   height: 30,
+                      //   child: IconButton.filled(
+                      //     padding: EdgeInsets.zero,
+                      //     onPressed: () {},
+                      //     iconSize: 18,
+                      //     icon: const Icon(Icons.add,color: Colors.white,),
+                      //   ),
+                      // )
                     ],
                   )
                 ],

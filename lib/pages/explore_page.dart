@@ -14,6 +14,7 @@ class ExplorePage extends StatefulWidget {
 }
 
 class _ExplorePageState extends State<ExplorePage> {
+  TextEditingController searchController=TextEditingController();
     @override
   void initState() {
     Provider.of<GardenProvider>(context, listen: false)
@@ -35,28 +36,39 @@ class _ExplorePageState extends State<ExplorePage> {
             child: Row(
               children: [
                 Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: "Search here...",
-                      isDense: true,
-                      contentPadding: const EdgeInsets.all(12.0),
-                      border: const OutlineInputBorder(
-                        borderSide: BorderSide(),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(99),
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.grey.shade300,
-                        ),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(99),
-                        ),
-                      ),
-                      prefixIcon: const Icon(IconlyLight.search),
+                  child:  TextFormField(
+                    
+                  controller: searchController,
+                  keyboardType: TextInputType.text,
+                  decoration:  InputDecoration(
+                    contentPadding: EdgeInsets.all(12.0),
+                    border: OutlineInputBorder(
+                      
+                      borderRadius: BorderRadius.circular(99),borderSide: BorderSide.none
                     ),
+                    fillColor: Colors.grey[200],
+                    filled: true,
+                    prefixIcon: Icon(
+                      Icons.search,
+                     // size: 17,
+                    ),
+                    hintText: "Search here...",
+                    hintStyle: TextStyle(
+                        color: Colors.black,
+                       fontSize: 14,
+                        fontWeight: FontWeight.w400),
+                 
+                 
                   ),
+                  style: const TextStyle(color: Colors.black),
+                  onChanged: (value) {
+                    if (value != "") {
+                      String searchQuery = value.toLowerCase();
+                      print("hhhhhhhhh");
+                      garden.getSearchData(value: searchQuery);
+                    }
+                  },
+                ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 12),
@@ -86,13 +98,13 @@ class _ExplorePageState extends State<ExplorePage> {
                             Text(
                               "Community Garden",
                               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                    color: Colors.green.shade700,
+                                    color: Colors.green.shade700,fontWeight: FontWeight.bold
                                   ),
                             ),
                             const Text("Get free support from our customer service"),
                             FilledButton(
                               onPressed: () {},
-                              child: const Text("Call now"),
+                              child: const Text("Call now",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                             ),
                           ],
                         ),
@@ -111,72 +123,101 @@ class _ExplorePageState extends State<ExplorePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Featured Gardens",
-                style: Theme.of(context).textTheme.titleMedium,
+                "Featured Garden Packages",
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.bold),
               ),
               TextButton(
                 onPressed: () {},
                 child: const Text("See all"),
               ),
             ],
+          ), 
+          Expanded(
+            child: garden.loadingSpinner
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const LoadingScreen(title: 'Loading'),
+                            CircularProgressIndicator(
+                              color: Colors.green,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                         
+                          ],
+                        )
+                      : garden.gardens.isEmpty
+                          ? Center(
+                              child: Text(
+                              'No Garden Packages...',
+                              style: TextStyle(color: Colors.green),
+                            )):garden.searchProducts.isEmpty&&
+                            searchController.text.isNotEmpty?Center(
+                              child: Text('No Gardens Avilable',style: TextStyle(color:Colors.green),),):
+                              searchController.text.isNotEmpty&&
+                              garden.searchProducts.isNotEmpty?
+                              SizedBox(
+                              height: size.height * 0.6,
+                              child: GridView.builder(
+                                  itemCount: garden.searchProducts.length,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.8,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+              ),
+            
+            
+                                scrollDirection: Axis.vertical,
+                                
+                                itemBuilder: (context, intex) {
+                                  return AllGardenWidgett(
+                  packageid: garden.searchProducts[intex].packageId,
+                  packagename: garden.searchProducts[intex].packageName,
+                  price: garden.searchProducts[intex].price,
+                  area: garden.searchProducts[intex].area,
+                  unittype: garden.searchProducts[intex].unitType,
+                  image: garden.searchProducts[intex].photo);
+            
+                                },
+                              ),
+                            )
+                  
+                  
+                          : SizedBox(
+                              height: size.height * 0.6,
+                              child:GridView.builder(
+                                  itemCount: garden.gardens.length,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.8,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+              ),
+            
+            
+                                scrollDirection: Axis.vertical,
+                                
+                                itemBuilder: (context, intex) {
+                                  return AllGardenWidgett(
+                  packageid: garden.gardens[intex].packageId,
+                  packagename: garden.gardens[intex].packageName,
+                  price: garden.gardens[intex].price,
+                  area: garden.gardens[intex].area,
+                  unittype: garden.gardens[intex].unitType,
+                  image: garden.gardens[intex].photo);
+            
+                                },
+                              ),
+                            ),
           ),
-          garden.loadingSpinner
-                  ? const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        LoadingScreen(title: 'Loading'),
-                        CircularProgressIndicator(
-                          color:Colors.green,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                     
-                      ],
-                    )
-                  : garden.gardens.isEmpty
-                      ? const Center(
-                          child: Text(
-                          'No Garden Packages...',
-                          style: TextStyle(color:Colors.green),
-                        ))
-                      : SizedBox(
-                          height: size.height * 0.6,
-                          child: GridView.builder(
-            itemCount: garden.gardens.length,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.8,
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-            ),
-            itemBuilder: (context, index) {
-              return AllGardenWidgett(
-                packageid: garden.gardens[index].packageId,
-                packagename: garden.gardens[index].packageName,
-                price: garden.gardens[index].price,
-                area: garden.gardens[index].area,
-                unittype: garden.gardens[index].unitType,
-                image: garden.gardens[index].photo);
-            },
-          )
-                        ),  
-          // GridView.builder(
-          //   itemCount: products.length,
-          //   shrinkWrap: true,
-          //   physics: const NeverScrollableScrollPhysics(),
-          //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          //     crossAxisCount: 2,
-          //     childAspectRatio: 0.8,
-          //     crossAxisSpacing: 16,
-          //     mainAxisSpacing: 16,
-          //   ),
-          //   itemBuilder: (context, index) {
-          //     return ProductCard(product: products[index]);
-          //   },
-          // )
+          
+      
         ],
       ),
     );
