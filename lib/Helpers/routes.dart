@@ -3,10 +3,12 @@
 
 
 import 'package:community_garden_coordinator/pages/CategoryEachProvider/categoryeachscreen.dart';
+import 'package:community_garden_coordinator/pages/OrderProvider/orderdetailsscreen.dart';
+import 'package:community_garden_coordinator/pages/OrderProvider/ordersscreen.dart';
 import 'package:community_garden_coordinator/pages/product_details_page.dart';
 import 'package:community_garden_coordinator/pages/registerationpage.dart';
 import 'package:community_garden_coordinator/pages/services_page.dart';
-import 'package:community_garden_coordinator/provider/CategoryProvider/allcategoryscreen.dart';
+
 import 'package:community_garden_coordinator/provider/ViewPackageProvider/allgardensscreen.dart';
 import 'package:flutter/material.dart';
 
@@ -36,5 +38,11 @@ var customRoutes = <String, WidgetBuilder>{
       );
     }
   },
-    
+   'all_orders_screen':(context) => MyOrdersScreen(),
+    'order_details_screen': (context) {
+           String id = ModalRoute.of(context)!.settings.arguments.toString();
+           return OrderDetailsScreen(
+           id: id,
+    ); 
+  },   
 };

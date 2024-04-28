@@ -64,8 +64,8 @@ class _AllEachCategoryWidgetState extends State<AllEachCategoryWidget > {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 6.0),
                     child: Text(
-                      widget.packagename.substring(0,16),
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
+                      widget.packagename,
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
                   Row(

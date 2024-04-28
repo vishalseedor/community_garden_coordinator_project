@@ -1,11 +1,14 @@
 
 import 'dart:convert';
 
+import 'package:community_garden_coordinator/pages/ProfileScreen/profilemodel.dart';
+import 'package:community_garden_coordinator/pages/ProfileScreen/userprovider.dart';
 import 'package:community_garden_coordinator/pages/home_page.dart';
 import 'package:community_garden_coordinator/pages/registerationpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -27,18 +30,34 @@ class _LoginPageState extends State<LoginPage> {
 
     Map<String, String> body = {'email': email, 'password': password};
 
-    try {
+  try {
       final response = await http.post(
         Uri.parse(url),
         body: body,
       );
+      print(url);
       var jsonData = json.decode(response.body);
-
+      print(jsonData);
+      print(jsonData["status"]);
       if (response.statusCode == 200) {
         if (jsonData['status'] == true) {
+          //      getstorage.write("phone",loginModel!.phone.toString());
+          // getstorage.write("password",loginModel!.password.toString());
+          // getstorage.read(phone);
+          // phone=getstorage.read("phone");
+
+          List user = jsonData['userDetails'];
+          if (user.isNotEmpty) {
+            ProfileModel userdata = ProfileModel.fromJson(user[0]);
+            String userId = userdata.userid;
+            Provider.of<UserProvider>(context, listen: false)
+                .setCurrentUserId(userId);
+            print(userId);
+          }
+
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              backgroundColor: Color.fromARGB(255, 23, 77, 25),
+              backgroundColor:  Color.fromARGB(255, 23, 77, 25),
               content: const Text(
                 'Login Successful!',
                 style:
@@ -47,6 +66,7 @@ class _LoginPageState extends State<LoginPage> {
               duration: const Duration(seconds: 4),
             ),
           );
+
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -55,12 +75,11 @@ class _LoginPageState extends State<LoginPage> {
           print("Response body${response.body}");
 
           print('Login successful');
-        } else {
-          jsonData['status'] == false;
+        } else if (jsonData['status'] == false) {
           // ignore: use_build_context_synchronously
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              backgroundColor:Color.fromARGB(255, 23, 77, 25),
+              backgroundColor: Color.fromARGB(255, 23, 77, 25), 
               content: const Text(
                 'Invalid email and password',
                 style:
@@ -81,6 +100,7 @@ class _LoginPageState extends State<LoginPage> {
 
    @override
   void initState() {
+    super.initState();
     _passwordVisible = false;
   }
   @override
@@ -122,6 +142,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 20),
                       TextFormField(
+                        obscureText: _passwordVisible,
                       controller: passwordcontroller,
                     decoration: InputDecoration(border: OutlineInputBorder(borderRadius: BorderRadius.circular(15),
                     borderSide: BorderSide.none),

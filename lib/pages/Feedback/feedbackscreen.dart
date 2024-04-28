@@ -1,5 +1,9 @@
 
+import 'package:community_garden_coordinator/pages/Feedback/feedbackprovider.dart';
+import 'package:community_garden_coordinator/pages/ProfileScreen/userprovider.dart';
+import 'package:community_garden_coordinator/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
@@ -35,8 +39,8 @@ class _SupportScreenState extends State<SupportScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    // final support=Provider.of<FeedbackProvider>(context);
-    // final userData=Provider.of<UserProvider>(context);
+    final support=Provider.of<FeedbackProvider>(context);
+    final userData=Provider.of<UserProvider>(context);
   
     return SafeArea(
       child: Scaffold(
@@ -269,15 +273,15 @@ class _SupportScreenState extends State<SupportScreen> {
                         style:
                             ElevatedButton.styleFrom(backgroundColor:Color.fromARGB(255, 17, 85, 20)),
                         onPressed: ()async {
-                      //   if (_formKey.currentState!.validate()) {
-                      //           support.addFeedback(comments: commentcontroller.toString(),userId:userData.currentUserId.toString());                        
-                      //           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      //             backgroundColor:Colors.green,
-                      //             content: const Text("Feedback added successfully",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold),)));
-                      //           await Navigator.push(context,MaterialPageRoute(builder:(context)=>const PetBottomNavigation()));
+                        if (_formKey.currentState!.validate()) {
+                                support.addFeedback(comments: commentcontroller.toString(),userId:userData.currentUserId.toString());                        
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                  backgroundColor:Color.fromARGB(255, 31, 82, 32),
+                                  content: const Text("Feedback added successfully",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold),)));
+                                await Navigator.push(context,MaterialPageRoute(builder:(context)=>const HomePage()));
  
 
-                      // }
+                      }
                         },
                         child: const Text(
                           'Submit',

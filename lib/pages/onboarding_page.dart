@@ -4,9 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
-class OnboardingPage extends StatelessWidget {
+class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
 
+  @override
+  State<OnboardingPage> createState() => _OnboardingPageState();
+}
+
+class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,10 +30,11 @@ class OnboardingPage extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.bold,color: Colors.white)),
             ),
              Center(
-              child: Text('Coordinator',
+              child: Text('Co-ordinator',
                   style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.bold,color: Colors.white)),
             ),
-            SizedBox(height: 600),
+            Spacer(),
+          //  SizedBox(height: 600),
             // const Padding(
             //   padding: EdgeInsets.only(top: 30, bottom: 30),
             //   // child: Text(

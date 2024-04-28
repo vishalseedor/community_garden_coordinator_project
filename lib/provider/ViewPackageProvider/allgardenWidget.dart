@@ -2,7 +2,6 @@
 
 import 'package:community_garden_coordinator/pages/product_details_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 
 
 class AllGardenWidgett extends StatefulWidget {
@@ -50,7 +49,7 @@ class _AllGardenWidgettState extends State<AllGardenWidgett > {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(                                               
-              height: 130,
+              height: 135,
               alignment: Alignment.topRight,
               width: double.infinity,
               padding: const EdgeInsets.all(8),
@@ -70,8 +69,8 @@ class _AllGardenWidgettState extends State<AllGardenWidgett > {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 6.0),
                     child: Text(
-                      widget.packagename.substring(0,16),
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
+                      widget.packagename,
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold,fontSize: 14),
                     ),
                   ),
                   Row(
@@ -81,24 +80,27 @@ class _AllGardenWidgettState extends State<AllGardenWidgett > {
                         text: TextSpan(
                           children: [
                             TextSpan(
-                                text: "₹ ${widget.price}",
+                                text: "₹ :  ${widget.price}",
                                 style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.green,fontWeight: FontWeight.bold)),
+
                            
                           ],
                         ),
                       ),
-                      SizedBox(
-                        width: 30,
-                        height: 30,
-                        child: IconButton.filled(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {},
-                          iconSize: 18,
-                          icon: const Icon(Icons.add,color: Colors.white,),
-                        ),
-                      )
+                      // SizedBox(
+                      //   width: 30,
+                      //   height: 30,
+                      //   child: IconButton.filled(
+                      //     padding: EdgeInsets.zero,
+                      //     onPressed: () {},
+                      //     iconSize: 18,
+                      //     icon: const Icon(Icons.add,color: Colors.white,),
+                      //   ),
+                      // )
                     ],
-                  )
+                  ),
+                  // SizedBox(height: size.height*0.01),
+                  // Text(widget.area)
                 ],
               ),
             )
