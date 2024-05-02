@@ -1,11 +1,7 @@
 
-import 'package:badges/badges.dart' as badges;
-import 'package:community_garden_coordinator/pages/Feedback/feedbackscreen.dart';
 import 'package:community_garden_coordinator/pages/OrderProvider/ordersscreen.dart';
 import 'package:community_garden_coordinator/pages/ProfileScreen/userprovider.dart';
-import 'package:community_garden_coordinator/pages/cart_page.dart';
 import 'package:community_garden_coordinator/pages/explore_page.dart';
-import 'package:community_garden_coordinator/pages/login_page.dart';
 import 'package:community_garden_coordinator/pages/profile_page.dart';
 import 'package:community_garden_coordinator/pages/services_page.dart';
 import 'package:flutter/material.dart';
@@ -144,12 +140,16 @@ class _HomePageState extends State<HomePage> {
       // ),
       appBar: AppBar(
         centerTitle: false,
-        leading: IconButton.filledTonal(
-          onPressed: () {
-            _scaffoldKey.currentState?.openDrawer();
-          },
-          icon: const Icon(Icons.menu),
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset('assets/sp.png',scale: 7),
         ),
+        // leading: IconButton.filledTonal(
+        //   onPressed: () {
+        //     _scaffoldKey.currentState?.openDrawer();
+        //   },
+        //   icon: const Icon(Icons.menu),
+        // ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

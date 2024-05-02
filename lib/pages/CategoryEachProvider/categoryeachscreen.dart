@@ -58,7 +58,7 @@ class _AllCategoryEachScreenState extends State<AllCategoryEachScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-         catepackage.package.isNotEmpty?Text('Category Products Near You',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),):Text(''),
+         catepackage.package.isNotEmpty?Text('Category Packages Near You',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),):Text(''),
             //  cateproduct.category.isEmpty?Text(''): TextFormField(
             //     decoration: InputDecoration(border: OutlineInputBorder(borderRadius: BorderRadius.circular(10),borderSide: BorderSide.none),fillColor: Colors.white,filled: true,hintText: 'Search',suffixIcon: Icon(Icons.search)),
             //       onChanged: (value) {

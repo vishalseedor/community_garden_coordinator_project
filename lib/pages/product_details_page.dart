@@ -5,7 +5,6 @@ import 'package:community_garden_coordinator/pages/OrderProvider/globalsnackbar.
 import 'package:community_garden_coordinator/pages/OrderProvider/orderprovider.dart';
 import 'package:community_garden_coordinator/pages/ProfileScreen/userprovider.dart';
 import 'package:community_garden_coordinator/provider/ViewPackageProvider/viewpackageprovider.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
@@ -130,7 +129,7 @@ class _GardenDetailsPageState extends State<GardenDetailsPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: Text(
-                    "2 ${gardenData.unitType}",
+                    "Size : ${gardenData.area}",
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           fontWeight: FontWeight.bold,
                         ),

@@ -106,6 +106,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
    Widget build(BuildContext context) {
     return Scaffold(
+   
       body: SingleChildScrollView(
         child: SafeArea(
           minimum: const EdgeInsets.all(20),
@@ -196,7 +197,7 @@ class _LoginPageState extends State<LoginPage> {
                    Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('Don t have a an account ?',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+                          const Text('Don t have  an account ?',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
                           TextButton(onPressed: ()async{
                             Navigator.push(context,MaterialPageRoute(builder:(context)=>const RegisterationPage()));
                           }, child:Text('Register',style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold))),

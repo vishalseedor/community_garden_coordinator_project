@@ -72,13 +72,13 @@ class _ExplorePageState extends State<ExplorePage> {
                         },
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 12),
-                      child: IconButton.filled(
-                        onPressed: () {},
-                        icon: const Icon(IconlyLight.filter),
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(left: 12),
+                    //   child: IconButton.filled(
+                    //     onPressed: () {},
+                    //     icon: const Icon(IconlyLight.filter),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
