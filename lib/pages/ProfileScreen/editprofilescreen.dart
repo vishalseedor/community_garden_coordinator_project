@@ -1,10 +1,7 @@
 import 'dart:io';
-
 import 'package:community_garden_coordinator/pages/ProfileScreen/userprovider.dart';
 import 'package:community_garden_coordinator/pages/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
@@ -20,19 +17,57 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   File? image;
-  // Future pickImage() async {
-  //   try {
-  //     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-  //     if (image == null) return;
-  //     final imageTemporary = File(image.path);
-  //     setState(() {
-  //       this.image = imageTemporary;
-  //     });
-  //   } on PlatformException catch (e) {
-  //     print('Failed to pick image:$e');
-  //   }
-  // }
-
+  // var username=Consumer<UserProvider>(builder: (context, value, child) {
+  //               String userAddress = "";
+  //               for (var i = 0; i < value.users.length; i++) {
+  //                 userAddress = value.users[i].firstname;
+  //                 print(userAddress+'vvvvvvvvv');
+  //               }
+  //               return Center(
+  //                 child: Text(
+  //                   '$userAddress',
+  //                   style:Theme.of(context).textTheme.titleMedium,
+  //                 ),
+  //               );
+  //             });
+  //   var phone = Consumer<UserProvider>(builder: (context, value, child) {
+  //               String userAddress = "";
+  //               for (var i = 0; i < value.users.length; i++) {
+  //                 userAddress = value.users[i].phone;
+  //                 print(userAddress+'vvvvvvvvv');
+  //               }
+  //               return Center(
+  //                 child: Text(
+  //                   '$userAddress',
+  //                   style:Theme.of(context).textTheme.titleMedium,
+  //                 ),
+  //               );
+  //             });
+  //             var email = Consumer<UserProvider>(builder: (context, value, child) {
+  //               String userAddress = "";
+  //               for (var i = 0; i < value.users.length; i++) {
+  //                 userAddress = value.users[i].email;
+  //                 print(userAddress+'vvvvvvvvv');
+  //               }
+  //               return Center(
+  //                 child: Text(
+  //                   '$userAddress',
+  //                   style:Theme.of(context).textTheme.titleMedium,
+  //                 ),
+  //               );
+  //             });
+ @override
+  void initState() {
+ final user= Provider.of<UserProvider>(context);
+ Provider.of<UserProvider>(context,listen: false).getUserData(context: context);
+    userNameController.text=user.users.firstName;
+    phoneNumberController.text=user.phone;
+    addressController.text=user.email;
+    super.initState();
+   
+  }
+  
+ 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -43,15 +78,15 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back_rounded,
-              color: Colors.black,
-            ),
-          ),
+          // leading: IconButton(
+          //   onPressed: () {
+          //     Navigator.pop(context);
+          //   },
+          //   icon: const Icon(
+          //     Icons.arrow_back_rounded,
+          //     color: Colors.black,
+          //   ),
+          // ),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -67,33 +102,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       style:
                           TextStyle(fontWeight: FontWeight.w700, fontSize: 22),
                     ),
-                //    imageProfile()
-                    // SizedBox(
-                    //   child: CircleAvatar(
-                    //     radius: 40.0,
-                    //     backgroundColor: Colors.white,
-                    //     child: CircleAvatar(
-                    //       child: Align(
-                    //         alignment: Alignment.bottomRight,
-                    //         child: CircleAvatar(
-                    //           backgroundColor: Colors.black,
-                    //           radius: 12.0,
-                    //           child: Icon(
-                    //             Icons.camera_alt,
-                    //             size: 15.0,
-                    //             color: Colors.white,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       radius: 30,
-                    //       backgroundImage: AssetImage('assets/profile.png'),
-                    //     ),
-                    //   ),
-                    // ),
-                    // CircleAvatar(
-                    //   radius: 30,
-                    //   child: Image.asset('assets/profile.png'),
-                    // ),
+              
                   ],
                 ),
                 SizedBox(
@@ -115,8 +124,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                          fillColor: Colors.grey[200],
                          filled: true,
                         hintText: 'Enter User Name',
-                        
-                        hintStyle: TextStyle(fontSize: 13),
+                        hintStyle: const TextStyle(fontSize: 13),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),borderSide: BorderSide.none
                         )),

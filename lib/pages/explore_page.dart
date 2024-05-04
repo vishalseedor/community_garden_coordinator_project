@@ -30,6 +30,7 @@ class _ExplorePageState extends State<ExplorePage> {
     final size = MediaQuery.of(context).size;
     final garden = Provider.of<GardenProvider>(context);
     return Scaffold(
+    
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Padding(

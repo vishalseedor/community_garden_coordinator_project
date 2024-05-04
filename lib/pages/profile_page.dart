@@ -5,7 +5,6 @@ import 'package:community_garden_coordinator/pages/Feedback/privacyandpolicyscre
 import 'package:community_garden_coordinator/pages/ProfileScreen/editprofilescreen.dart';
 import 'package:community_garden_coordinator/pages/ProfileScreen/userprovider.dart';
 import 'package:community_garden_coordinator/pages/login_page.dart';
-import 'package:community_garden_coordinator/pages/orders_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
